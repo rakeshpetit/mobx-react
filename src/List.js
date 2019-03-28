@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {observer} from "mobx-react";
+import Total from "./Total";
 
 @observer
 class List extends Component {
@@ -9,10 +10,11 @@ class List extends Component {
       <div style={{marginTop: 20}}>
        <div>List of Todos</div>
        {
-         this.props.todos.map(obj => {
+         this.props.appState.todos.map(obj => {
                return <div key={obj.index}>{obj.item}</div>
            })
        }
+       <Total itemCount={this.props.appState.itemCount}/>
       </div>
     );
   }

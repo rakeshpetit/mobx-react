@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 import { observer } from "mobx-react";
 import Counter from "./Counter";
 import Input from "./Input";
@@ -12,15 +12,20 @@ import sassStyles from './Second.module.scss';
 import lessStyles from './Third.module.less';
 import stylusStyles from './Fourth.module.styl';
 
-const appState = observable({
-  count: 0,
-  todos: [
+class AppState {
+  @observable count = 0
+  @observable todos = [
     {
       index: 0,
       item: 'Buy milk'
     }
     ]
-})
+  @computed get itemCount() {
+      return this.todos.length
+    }
+}
+
+const appState = new AppState();
 
 class App extends Component {
   render() {
@@ -29,7 +34,7 @@ class App extends Component {
         <div>My App</div>
         <Counter appState={appState}/>
         <Input todos={appState.todos}/>
-        <List todos={appState.todos}/>
+        <List appState={appState}/>
       </div>
     );
   }
