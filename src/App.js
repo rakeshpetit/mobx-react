@@ -19,20 +19,7 @@ const appState = observable({
       index: 0,
       item: 'Buy milk'
     }
-    ],
-  addTodo: (item) => {
-    console.log('addTodo')
-    const index = appState.todos.length;
-    appState.todos.push({index, item})
-  },
-  incCount: () => {
-    console.log('incCount')
-    appState.count += 1;
-  },
-  decCount: () => {
-    console.log('decCount')
-    appState.count -= 1;
-  }
+    ]
 })
 
 class App extends Component {
@@ -41,7 +28,7 @@ class App extends Component {
       <div className="App">
         <div>My App</div>
         <Counter appState={appState}/>
-        <Input addTodo={appState.addTodo}/>
+        <Input todos={appState.todos}/>
         <List todos={appState.todos}/>
       </div>
     );

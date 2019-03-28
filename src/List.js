@@ -4,13 +4,13 @@ import {observer} from "mobx-react";
 @observer
 class List extends Component {
   render() {
-    console.log('todos', this.props.todos[0]);
+    console.log('List component')
     return (
       <div style={{marginTop: 20}}>
        <div>List of Todos</div>
        {
          this.props.todos.map(obj => {
-               return <div>{obj.item}</div>
+               return <div key={obj.index}>{obj.item}</div>
            })
        }
       </div>

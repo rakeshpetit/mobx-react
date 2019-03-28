@@ -13,13 +13,21 @@ class Input extends Component {
     this.setState({value: event.target.value});
   }
 
+  addTodo = (item) => {
+    console.log('addTodo')
+    const { todos } = this.props
+    const index = todos.length;
+    todos.push({index, item})
+  }
+
   handleSubmit(event) {
-    this.props.addTodo(this.state.value)
+    this.addTodo(this.state.value)
     event.preventDefault();
     this.setState({value: ''})
   }
   
   render() {
+    console.log('Input component')
     return (
       <div style={{marginTop: 20}}>
         <form onSubmit={this.handleSubmit}>
