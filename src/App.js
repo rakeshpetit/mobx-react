@@ -1,0 +1,51 @@
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import { observable } from 'mobx';
+import { observer } from "mobx-react";
+import Counter from "./Counter";
+import Input from "./Input";
+import List from "./List";
+
+//modules
+import cssStyles from './First.module.css';
+import sassStyles from './Second.module.scss';
+import lessStyles from './Third.module.less';
+import stylusStyles from './Fourth.module.styl';
+
+const appState = observable({
+  count: 0,
+  todos: [
+    {
+      index: 0,
+      item: 'Buy milk'
+    }
+    ],
+  addTodo: (item) => {
+    console.log('addTodo')
+    const index = appState.todos.length;
+    appState.todos.push({index, item})
+  },
+  incCount: () => {
+    console.log('incCount')
+    appState.count += 1;
+  },
+  decCount: () => {
+    console.log('decCount')
+    appState.count -= 1;
+  }
+})
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <div>My App</div>
+        <Counter appState={appState}/>
+        <Input addTodo={appState.addTodo}/>
+        <List todos={appState.todos}/>
+      </div>
+    );
+  }
+}
+
+export default App;
